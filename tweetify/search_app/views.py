@@ -23,7 +23,7 @@ def index(request):
             auth.set_access_token(access_token,access_token_secret)
             api = tweepy.API(auth)
 
-            tweets = api.search(q=search,count=5000)
+            tweets = api.search(q=search,count=5000,tweet_mode='extended')
 
             return render(request,"search_app/list.html",{'tweet_list':tweets})
 
