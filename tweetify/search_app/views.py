@@ -9,5 +9,5 @@ def index(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             search = form.cleaned_data['search']
-            print("Topic is", search)
+            print("Topic is",search)
     return render(request,"search_app/index.html",{'form':form})

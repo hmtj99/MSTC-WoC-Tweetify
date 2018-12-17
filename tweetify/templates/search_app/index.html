@@ -2,9 +2,15 @@
 {%extends "search_app/base.html"%}
 {% block body_block %}
   <h1 class="display-1 text-center">Enter The Topic, Get The Tweets</h1>
-  <form class="form" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="btn btn-primary" value="Search">
-  </form>
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+      <div class="text-center">
+          <input type="submit" class="btn btn-dark btn-lg" value="Search">
+      </div>
+
+    </form>
+  </div>
+
 {% endblock %}
