@@ -23,8 +23,14 @@ def index(request):
             auth.set_access_token(access_token,access_token_secret)
             api = tweepy.API(auth)
 
-            tweets = api.search(q=search,count=5000,tweet_mode='extended')
+            tweets = api.search(q=search,count=5000,tweet_mode='extended',lang='en')
+            sentiment_list = []
+            for tweet in tweets:
+                blob = TextBlob(tweet.full_text)
+                sentiment = blob.sentiment.polarity
+                sentiment_list.append(sentiment)
 
-            return render(request,"search_app/list.html",{'tweet_list':tweets})
+            result = zip(tweets,sentiment_list)    
+            return render(request,"search_app/list.html",{'result':result})
 
     return render(request,"search_app/index.html",{'form':form})

@@ -4,10 +4,20 @@
 {% block body_block %}
 <h1 class="display-2 text-center">Here Are The Tweets</h1>
 <div class="container">
-  {% for tweet in tweet_list %}
+  {% for tweet, sentiment in result %}
       <div class="card">
         <div class="card-body">
           <p class="lead">{{tweet.full_text}}</p>
+        </div>
+        <div class="card-footer text-muted">
+          {{sentiment}}
+          {% if sentiment > 0 %}
+            - Positive
+          {% elif sentiment < 0 %}
+            - Negative
+          {% else %}
+            - Neutral
+          {% endif %}      
         </div>
       </div>
       <br>
