@@ -10,13 +10,12 @@
           <p class="lead">{{tweet.full_text}}</p>
         </div>
         <div class="card-footer text-muted">
-          {{sentiment}}
           {% if sentiment > 0 %}
-            - Positive
+            Positive
           {% elif sentiment < 0 %}
-            - Negative
+            Negative
           {% else %}
-            - Neutral
+            Neutral
           {% endif %}      
         </div>
       </div>
