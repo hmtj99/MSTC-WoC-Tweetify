@@ -2,6 +2,7 @@ from django.shortcuts import render
 from search_app.forms import SearchForm
 import tweepy
 from textblob import TextBlob
+import os
 
 from search_app.forms import SearchForm
 
@@ -13,11 +14,11 @@ def index(request):
             search = form.cleaned_data['search']
             print("Topic is",search)
 
-            consumer = "NCp53tPqqk0cxBi8pS84osj1E"
-            consumer_secret = "NWiaVLvmRlrUMiBOJWz17VU7w2xQKu3NpgpGkc6DCuiVcf64p6"
+            consumer = os.environ.get('consumer')
+            consumer_secret = os.environ.get('consumer_secret')
 
-            access_token = "1072842454137589760-4o1HMJ4yauotAnmAY6rYvGlgOscqIQ"
-            access_token_secret = "cvLthe84mu8fZdfms5CZMlqCGTUONHDGNIjG86FnnyeG1"
+            access_token = os.environ.get('access_token')
+            access_token_secret = os.environ.get('access_token_secret')
 
             auth = tweepy.OAuthHandler(consumer,consumer_secret)
             auth.set_access_token(access_token,access_token_secret)
