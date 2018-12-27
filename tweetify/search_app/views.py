@@ -24,16 +24,26 @@ def index(request):
             auth = tweepy.OAuthHandler(consumer,consumer_secret)
             auth.set_access_token(access_token,access_token_secret)
             api = tweepy.API(auth)
-
+            pos=neg=neu=0
             tweets = api.search(q=search,count=5000,tweet_mode='extended',lang='en')
             sentiment_list = []
             for tweet in tweets:
                 blob = TextBlob(tweet.full_text)
                 sentiment = blob.sentiment.polarity
                 sentiment_list.append(sentiment)
+                if sentiment>0:
+                    pos+=1
+                elif sentiment<0:
+                    neg+=1
+                else:
+                    neu+=1 
+
+            pos_pertage = (pos/(pos+neg+neu))*100
+            neg_pertage = (neg/(pos+neg+neu))*100
+            neu_pertage = 100 - (pos_pertage+neg_pertage)               
     
             result = zip(tweets,sentiment_list)    
-            return render(request,"search_app/list.html",{'result':result})
+            return render(request,"search_app/list.html",{'result':result,'pos_pertage':pos_pertage,'neg_pertage':neg_pertage,'neu_pertage':neu_pertage})
 
     value = random.randint(0,30)
     value2 = random.randint(0,30)
