@@ -38,12 +38,16 @@ def index(request):
                 else:
                     neu+=1 
 
-            pos_pertage = (pos/(pos+neg+neu))*100
-            neg_pertage = (neg/(pos+neg+neu))*100
-            neu_pertage = 100 - (pos_pertage+neg_pertage)               
+            pos_pertage = (pos/(pos+neg+neu))*100.00
+            neg_pertage = (neg/(pos+neg+neu))*100.00
+            neu_pertage = 100.00 - (pos_pertage+neg_pertage) 
+
+            pos_final = round(pos_pertage,2)
+            neg_final = round(neg_pertage,2)
+            neu_final = round(neu_pertage,2)              
     
             result = zip(tweets,sentiment_list)    
-            return render(request,"search_app/list.html",{'result':result,'pos_pertage':pos_pertage,'neg_pertage':neg_pertage,'neu_pertage':neu_pertage})
+            return render(request,"search_app/list.html",{'result':result,'pos_final':pos_final,'neg_final':neg_final,'neu_final':neu_final})
 
     value = random.randint(0,30)
     value2 = random.randint(0,30)
